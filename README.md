@@ -18,6 +18,8 @@ For communication, CAN-bus is implemented which carries all signals and messages
 In the project, a customized Arduino Mega with MCP2515 CAN controller is utilized for integrating external sensors. Its key advantage lies in seamless integration with the MicroAutoBox2, enabling the addition of various sensors to the system.
 
 Example of main file:
+
+
 cpp ```
 #include "config.h"
 
