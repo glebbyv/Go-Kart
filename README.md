@@ -15,4 +15,28 @@ For communication, CAN-bus is implemented which carries all signals and messages
 
 # External Sensors Integration
 ![image](images/pins.png)
-In our project, we utilize a customized version of the Arduino Mega for integrating external sensors. This custom board is tailored specifically for our needs, including built-in CAN communication capabilities. Its main feature lies in its seamless integration with the MicroAutoBox2, enabling the addition of various sensors to our system.
+In the project, a customized Arduino Mega with MCP2515 CAN controller is utilized for integrating external sensors. Its key advantage lies in seamless integration with the MicroAutoBox2, enabling the addition of various sensors to the system.
+
+Example of main file:
+cpp ```
+#include "config.h"
+
+void setup() {
+  Serial.begin(115200);
+
+}
+
+void loop() {
+  pot.conv2bytes();
+
+  //send msg
+  CanHandler.Data[0] = pot.msb;
+  CanHandler.Data[1] = pot.lsb;
+  CanHandler.Data[2] = sonic1.dist();
+  CanHandler.Data[3] = sonic2.dist();
+
+  // send data:  ID = 0x100, Standard CAN Frame 0, Data length = 8 bytes, 'data' = array of data bytes to send
+  CanHandler.send(0x100, 0, 8);
+
+  delay(50);  // send data per 50ms
+}
