@@ -20,7 +20,7 @@ In the project, a customized Arduino Mega with MCP2515 CAN controller is utilize
 Example of main file:
 
 
-cpp ```
+```cpp
 #include "config.h"
 
 void setup() {
